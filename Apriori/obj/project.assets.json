@@ -701,11 +701,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Johann\\Documents\\Visual Studio 2017\\Projects\\_Apriori\\Apriori\\Apriori.csproj",
+      "projectUniqueName": "C:\\Users\\Johann\\Documents\\apriori\\Apriori\\Apriori.csproj",
       "projectName": "Apriori",
-      "projectPath": "C:\\Users\\Johann\\Documents\\Visual Studio 2017\\Projects\\_Apriori\\Apriori\\Apriori.csproj",
+      "projectPath": "C:\\Users\\Johann\\Documents\\apriori\\Apriori\\Apriori.csproj",
       "packagesPath": "C:\\Users\\Johann\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Johann\\Documents\\Visual Studio 2017\\Projects\\_Apriori\\Apriori\\obj\\",
+      "outputPath": "C:\\Users\\Johann\\Documents\\apriori\\Apriori\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",

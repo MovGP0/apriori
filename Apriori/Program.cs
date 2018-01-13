@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
-using MoreLinq;
 
 namespace Apriori
 {
@@ -8,12 +9,37 @@ namespace Apriori
     {
         private static void Main()
         {
-            var loader = new FileTransactionsLoader();
-            var transactions = loader.Load();
+            var transactions = new FileTransactionsLoader().Load().ToImmutableArray();
 
-            transactions
-                .Select(tx => tx.Format())
-                .ForEach(item => Console.WriteLine(item));
+            OutputFrequentItems(transactions);
+        }
+
+        /// <summary>
+        /// Outputs all the length-1 frequent items (itemsets containing only one element) 
+        /// with their absolute supports into a textfile named "oneItems.txt"
+        /// </summary>
+        /// <param name="transactions"></param>
+        private static void OutputFrequentItems(ImmutableArray<ISet<string>> transactions)
+        {
+            const string fileName = "oneItems.txt";
+            var result = transactions
+                            .ExtractFeatures()
+                            .FilterByFrequency(transactions)
+                            .Select(feature => feature.FormatSupport(transactions.Support(feature)));
+
+            WriteLinesToFile(result, fileName);
+        }
+
+        private static void WriteLinesToFile(IEnumerable<string> result, string fileName)
+        {
+            var directory = Directory.GetCurrentDirectory();
+            using (var file = new StreamWriter(Path.Combine(directory, fileName)))
+            {
+                foreach (var line in result)
+                {
+                    file.WriteLineAsync(line).Wait();
+                }
+            }
         }
     }
 }

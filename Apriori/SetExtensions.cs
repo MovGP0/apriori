@@ -25,5 +25,25 @@ namespace Apriori
             builder.Append(" }");
             return builder.ToString();
         }
+
+        public static string FormatSupport(this ISet<string> set, int support)
+        {
+            if (set == null) throw new ArgumentNullException(nameof(set));
+            if(support < 0) throw new ArgumentOutOfRangeException(nameof(support));
+
+            var builder = new StringBuilder();
+            builder.AppendFormat("{0}:", support);
+            var isFirstItem = true;
+            foreach (var item in set)
+            {
+                if (!isFirstItem)
+                {
+                    builder.Append(", ");
+                }
+                builder.Append(item);
+                isFirstItem = false;
+            }
+            return builder.ToString();
+        }
     }
 }

@@ -55,7 +55,7 @@ namespace Apriori
             if (minFrequency < 0f) throw new ArgumentOutOfRangeException(nameof(minFrequency), minFrequency, "Must be a positive number");
             if (minFrequency > 1f) throw new ArgumentOutOfRangeException(nameof(minFrequency), minFrequency, "Must be lower than 100%.");
 
-            return candidates.Where(c => Frequency(transactions, c) > minFrequency);
+            return candidates.Where(c => Frequency(transactions, c) >= minFrequency);
         }
 
         /// <summary>

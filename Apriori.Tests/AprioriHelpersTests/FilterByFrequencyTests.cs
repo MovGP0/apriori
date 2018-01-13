@@ -27,7 +27,7 @@ namespace Apriori.Tests.AprioriHelpersTests
             var transactions = new TestTransactionsLoader().Load().ToImmutableArray();
             var candidates = transactions.ExtractFeatures();
             var result = candidates.FilterByFrequency(transactions, minFrequency);
-            result.Select(set => SetExtensions.Format(set)).ForEach(line => Console.WriteLine(line));
+            result.Select(set => set.Format()).ForEach(line => Console.WriteLine(line));
             result.Count().Should().Be(expected);
         }
     }

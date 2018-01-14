@@ -5878,6 +5878,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "C:\\Users\\Johann\\Documents\\apriori\\Apriori.Tests\\Apriori.Tests.csproj",
       "projectName": "Apriori.Tests",
@@ -5928,7 +5931,6 @@
             "version": "[15.5.0, )"
           },
           "Microsoft.NETCore.App": {
-            "suppressParent": "All",
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true

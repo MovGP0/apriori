@@ -1,35 +1,42 @@
 # plot the iris data
 data("iris")
-plot(iris$Petal.Length, iris$Petal.Width, main = "iris data")
+sepal <- as.matrix(iris[, 1:2]) # get column 1 and 2
+petal <- as.matrix(iris[, 3:4]) # get column 3 and 4
+
+plot(iris$Petal.Length, iris$Petal.Width, main = "iris data", col = "red", xlab = "Length", ylab = "Width", xlim=c(0, 8), ylim=c(0,5))
+points(iris$Sepal.Length, iris$Sepal.Width, col = "green")
 
 # apply k-means clustering
-data("iris")
-set.seed(20) 
-irisCluster <- kmeans(iris[, 3:4], 2, nstart = 20)
-plot(iris, col = irisCluster$cluster)
+set.seed(20)
+irisSepalKCluster <- kmeans(setal, 2, nstart = 20)
+irisPetalKCluster <- kmeans(petal, 2, nstart = 20)
+points(irisSepalKCluster$centers, col = "cyan", pch = "+") # plotting the center of the clusters
+points(irisPetalKCluster$centers, col = "blue", pch = "*") 
+
+library(cluster)
+clusplot(iris[, 1:2], irisSepalKCluster$cluster, color = TRUE, shade = TRUE, lines = 0)
+clusplot(iris[, 3:4], irisPetalKCluster$cluster, color = TRUE, shade = TRUE, lines = 0)
 
 # Density Based Clustering of Applications with Noise (DBSCAN)
 install.packages("dbscan", quiet = TRUE)
 library("dbscan", quietly = TRUE)
 data("iris")
-x <- as.matrix(iris[, 1:4])
-db <- dbscan(x, eps = .4, minPts = 4)
-db
-pairs(x, col = db$cluster + 1L)
+irisSepalDbCluster <- dbscan(sepal, eps = .4, minPts = 4)
+irisPetalDbCluster <- dbscan(petal, eps = .4, minPts = 4)
+pairs(iris[, 3:4], col = irisPetalDbCluster$cluster)
+pairs(iris[, 1:2], col = irisPetalDbCluster$cluster)
+clusplot(iris[, 1:2], irisSepalDbCluster$cluster, color = TRUE, shade = TRUE, lines = 0)
+clusplot(iris[, 3:4], irisPetalDbCluster$cluster, color = TRUE, shade = TRUE, lines = 0)
 
 # Expectation-Maximization (EM) Clustering
 
 install.packages("EMCluster", quiet = TRUE)
 library("EMCluster", quietly = TRUE)
-set.seed(1234)
+set.seed(1234)
 data("iris")
-x <- as.matrix(iris[, 1:4])
-p <- ncol(x)
-ret <- starts.via.svd(x, nclass = 10, method = "em")
-summary(ret)
-plotem(ret, x)
+irisSepalSvdCluster <- starts.via.svd(sepal, nclass = 10, method = "em")
+plotem(irisSepalSvdCluster, sepal)
 
 # normalized mutual information (NMI)
 install.packages("NMI", quiet = TRUE)
 library("NMI", quietly = TRUE)
-

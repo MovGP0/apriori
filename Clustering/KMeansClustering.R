@@ -5,6 +5,7 @@
 # load packages
 library(ggplot2, quietly = TRUE)
 library(ggalt, quietly = TRUE)
+library(reshape2, quietly = TRUE)
 data("iris")
 
 number_of_clusters <- 6
@@ -26,4 +27,14 @@ plot <- plot + ggplot2::geom_point(data = iris, mapping = ggplot2::aes(x = Sepal
 # enclose clusters
 plot <- plot + ggalt::geom_encircle(data = iris, mapping = ggplot2::aes(x = Petal.Length, y = Petal.Width, colour = Cluster))
 plot <- plot + ggalt::geom_encircle(data = iris, mapping = ggplot2::aes(x = Sepal.Length, y = Sepal.Width, colour = Cluster))
+print(plot)
+
+# centers plot
+centersData <- reshape2::melt(result$centers)
+names(centersData) <- c("Cluster", "Measurement", "Centimeters")
+centersData$Cluster <- factor(centersData$Cluster)
+plot <- ggplot2::ggplot(data = centersData, ggplot2::aes(x = Measurement, y = Centimeters, group = Cluster)) +
+       ggplot2::geom_point(size = 3, ggplot2::aes(shape = Cluster, color = Cluster)) +
+       ggplot2::geom_line(size = 1, ggplot2::aes(color = Cluster)) +
+       ggplot2::ggtitle("Profiles for Iris Clusters")
 print(plot)

@@ -1,7 +1,6 @@
 ############################################
 # Expectation-Maximization (EM) Clustering #
 ############################################
-library(dbscan, quietly = TRUE)
 library(ggplot2, quietly = TRUE)
 library(ggalt, quietly = TRUE)
 library("EMCluster", quietly = TRUE)

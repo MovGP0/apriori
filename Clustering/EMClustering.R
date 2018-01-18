@@ -7,6 +7,7 @@ library("EMCluster", quietly = TRUE)
 require(plyr, quietly = TRUE)
 
 data("iris")
+set.seed(12345)
 
 irisData <- iris[, 1:4]
 number_of_clusters <- 6

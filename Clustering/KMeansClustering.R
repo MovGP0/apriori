@@ -7,6 +7,7 @@ library(ggplot2, quietly = TRUE)
 library(ggalt, quietly = TRUE)
 library(reshape2, quietly = TRUE)
 data("iris")
+set.seed(12345)
 
 number_of_clusters <- 6
 result <- kmeans(iris[, 1:4], number_of_clusters, nstart = 60)

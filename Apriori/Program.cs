@@ -33,7 +33,13 @@ namespace Apriori
         private static void WriteLinesToFile(IEnumerable<string> result, string fileName)
         {
             var directory = Directory.GetCurrentDirectory();
-            using (var file = new StreamWriter(Path.Combine(directory, fileName)))
+            var filePath = Path.Combine(directory, fileName);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            using (var file = new StreamWriter(filePath))
             {
                 foreach (var line in result)
                 {

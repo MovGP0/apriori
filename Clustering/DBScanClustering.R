@@ -7,6 +7,7 @@ library(dbscan, quietly = TRUE)
 library(ggplot2, quietly = TRUE)
 library(ggalt, quietly = TRUE)
 data("iris")
+set.seed(12345)
 
 result <- dbscan::dbscan(iris[, 1:4], eps = .4, minPts = 4)
 

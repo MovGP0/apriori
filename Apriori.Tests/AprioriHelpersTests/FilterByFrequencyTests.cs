@@ -19,14 +19,14 @@ namespace Apriori.Tests.AprioriHelpersTests
 
         [Theory]
         [InlineData(1f, 0)]
-        [InlineData(0.5f, 4)]
+        [InlineData(0.5f, 5)]
         [InlineData(0.1f, 5)]
         [InlineData(0f, 5)]
         public void ShouldFilterByFrequency(float minFrequency, int expected)
         {
             var transactions = new TestTransactionsLoader().Load().ToImmutableArray();
             var candidates = transactions.ExtractFeatures();
-            var result = candidates.FilterByFrequency(transactions, minFrequency);
+            var result = candidates.FilterByFrequency(transactions, minFrequency).ToImmutableArray();
             result.Select(set => set.Format()).ForEach(line => Console.WriteLine(line));
             result.Count().Should().Be(expected);
         }

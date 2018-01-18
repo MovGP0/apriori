@@ -4,3 +4,4 @@
 
 /Apriori/oneItems.txt
 /.vs/**
+**/obj/**

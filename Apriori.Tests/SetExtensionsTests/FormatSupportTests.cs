@@ -11,7 +11,7 @@ namespace Apriori.Tests.SetExtensionsTests
         {
             var set = new HashSet<string> { ">50K", "Master" };
             const int support = 3851;
-            set.FormatSupport(support).Should().Be("3851:>50K,Master");
+            set.FormatSupport(support).Should().Be("3851:>50K, Master");
         }
 
         [Fact]

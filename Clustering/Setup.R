@@ -1,6 +1,8 @@
 # R mirror only has old versions, so we use GitHub instead
 # R Tools must be installed to compile the sources
 # https://cran.r-project.org/bin/windows/Rtools/
+# the latest Microsoft R Open distribution can be found here: 
+# https://mran.microsoft.com/download
 
 if (!require("devtools")) install.packages("devtools")
 # update devtools

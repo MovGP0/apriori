@@ -10,8 +10,19 @@ namespace Apriori
         private static void Main()
         {
             var transactions = new FileTransactionsLoader().Load().ToImmutableArray();
-
+            
             OutputFrequentItems(transactions);
+            OutputMostFrequentItemSets(transactions);
+        }
+
+        /// <summary>
+        /// Writes all the frequent item sets along with their absolute supports into a text ﬁle named "patterns.txt"
+        /// </summary>
+        /// <param name="transactions"></param>
+        private static void OutputMostFrequentItemSets(ImmutableArray<ISet<string>> transactions)
+        {
+            var result = transactions.SearchMostFrequentItems();
+            WriteResultToFile(result, "patters.txt");
         }
 
         /// <summary>
@@ -22,18 +33,22 @@ namespace Apriori
         private static void OutputFrequentItems(ImmutableArray<ISet<string>> transactions)
         {
             const string fileName = "oneItems.txt";
-            var result = transactions
-                            .ExtractFeatures()
-                            .FilterByFrequency(transactions)
-                            .Select(feature => feature.FormatSupport(transactions.Support(feature)));
 
-            WriteLinesToFile(result, fileName);
+            var features = transactions.ExtractFeatures();
+            
+            var result = transactions
+                .CalculateFrequencyTable(features)
+                .FilterByFrequency();
+
+            var resultWithFrequencies = transactions.CalculateFrequencyTable(result);
+            WriteResultToFile(resultWithFrequencies, fileName);
         }
 
-        private static void WriteLinesToFile(IEnumerable<string> result, string fileName)
+        private static void WriteResultToFile(IEnumerable<ItemSupport> result, string fileName)
         {
+            var lines = result.Select(feature => feature.ToString());
             var directory = Directory.GetCurrentDirectory();
-            var filePath = Path.Combine(directory, fileName);
+            var filePath = Path.Combine(directory, "..", fileName);
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
@@ -41,7 +56,7 @@ namespace Apriori
 
             using (var file = new StreamWriter(filePath))
             {
-                foreach (var line in result)
+                foreach (var line in lines)
                 {
                     file.WriteLineAsync(line).Wait();
                 }

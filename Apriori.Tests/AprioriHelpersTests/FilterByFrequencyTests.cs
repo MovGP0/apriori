@@ -25,8 +25,9 @@ namespace Apriori.Tests.AprioriHelpersTests
         public void ShouldFilterByFrequency(float minFrequency, int expected)
         {
             var transactions = new TestTransactionsLoader().Load().ToImmutableArray();
-            var candidates = transactions.ExtractFeatures();
-            var result = candidates.FilterByFrequency(transactions, minFrequency).ToImmutableArray();
+            var features = transactions.ExtractFeatures();
+            var table = transactions.CalculateFrequencyTable(features);
+            var result = table.FilterByFrequency(minFrequency).ToImmutableArray();
             result.Select(set => set.Format()).ForEach(line => Console.WriteLine(line));
             result.Count().Should().Be(expected);
         }

@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 
 namespace Apriori
 {
-    public static class SetExtensions
+    public sealed class ItemSupport
     {
-        public static string Format(this ISet<string> set)
-        {
-            if(set == null) throw new ArgumentNullException(nameof(set));
+        public ISet<string> Item { get; set; }
+        public float Frequency { get; set; }
+        public int Support { get; set; }
 
+        public override string ToString()
+        {
             var builder = new StringBuilder();
-            builder.Append("{ ");
+            builder.AppendFormat("{0}:", Support);
             var isFirstItem = true;
-            foreach (var item in set)
+            foreach (var item in Item)
             {
                 if (!isFirstItem)
                 {
@@ -22,7 +23,6 @@ namespace Apriori
                 builder.Append(item);
                 isFirstItem = false;
             }
-            builder.Append(" }");
             return builder.ToString();
         }
     }

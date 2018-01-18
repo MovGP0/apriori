@@ -29,6 +29,7 @@ plot <- plot + ggalt::geom_encircle(data = iris, mapping = ggplot2::aes(x = Peta
 plot <- plot + ggalt::geom_encircle(data = iris, mapping = ggplot2::aes(x = Sepal.Length, y = Sepal.Width, colour = Cluster))
 # TODO: print result
 print(plot)
+ggplot2::ggsave("iris data em.png", plot = plot, device = "png", scale = 1, dpi = 300, width = 100, height = 100, units = "mm")
 
 # centers plot
 centersData <- reshape2::melt(result$Mu)

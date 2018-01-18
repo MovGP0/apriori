@@ -1,2 +1,2 @@
-3268:>50K, Married-civ-spouse, Male, Husband, White, United-States, Private
-3831:Married-civ-spouse, Male, Husband, <=50K, White, United-States, Private
+3268:Male, Private, >50K, Married-civ-spouse, Husband, United-States, White
+3831:Male, Private, Married-civ-spouse, Husband, <=50K, United-States, White

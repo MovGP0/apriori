@@ -46,5 +46,4 @@ devtools::install_github("ggobi/ggally")
 devtools::install_github("mhahsler/dbscan")
 devtools::install_github("snoweye/EMCluster")
 install.packages("PPtree")
-
-install.packages("NMI", quiet = TRUE)
+install.packages("NMI")

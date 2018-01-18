@@ -11,10 +11,9 @@ plot <- plot + ggplot2::labs(colour = "Feature")
 plot <- plot + ggplot2::geom_point(data = iris, mapping = ggplot2::aes(x = Petal.Length, y = Petal.Width, colour = Species, shape = "petal"))
 plot <- plot + ggplot2::geom_point(data = iris, mapping = ggplot2::aes(x = Sepal.Length, y = Sepal.Width, colour = Species, shape = "sepal"))
 print(plot)
-ggsave("iris data.pdf", plot = plot, device = "pdf", scale = 1, dpi = 300, width = 100, height = 100, units = "mm")
+GGally::ggsave("iris data.pdf", plot = plot, device = "pdf", scale = 1, dpi = 300, width = 100, height = 100, units = "mm")
 
 # matrix plot
 plot <- GGally::ggpairs(data = iris, mapping = ggplot2::aes(colour = Species))
 print(plot)
-ggsave("iris data pairs.pdf", plot = plot, device = "pdf", scale = 1, dpi = 300, width = 100, height = 100, units = "mm")
-
+ggplot2::ggsave("iris data pairs.png", plot = plot, device = "png", scale = 1, dpi = 300, width = 100, height = 100, units = "mm")
